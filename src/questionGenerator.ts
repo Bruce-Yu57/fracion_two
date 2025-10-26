@@ -91,13 +91,31 @@ const generateLevel3 = (): Question[] => { // Different Denominators +/-
 
 
 const generateLevel4 = (): Question[] => { // Multiplication
-    return Array.from({ length: 3 }, () => {
+    const questions: Question[] = [];
+    
+    // First two questions: regular fraction multiplication
+    for (let i = 0; i < 2; i++) {
         const f1 = { n: getRandomInt(-9, 9), d: getRandomInt(2, 10) };
         const f2 = { n: getRandomInt(-9, 9), d: getRandomInt(2, 10) };
         const problem = `${formatFrac({numerator: f1.n, denominator: f1.d}, true)} \\times ${formatFrac({numerator: f2.n, denominator: f2.d})}`;
         const answer = simplify(f1.n * f2.n, f1.d * f2.d);
-        return { problem, answer };
-    });
+        questions.push({ problem, answer });
+    }
+    
+    // Third question: fraction multiplied by integer (simplifiable)
+    let integer = getRandomInt(-10, 10);
+    while (integer === 0) {
+        integer = getRandomInt(-10, 10);
+    }
+    
+    // Generate a fraction where the integer might simplify with the denominator
+    const denominator = getRandomInt(2, 10);
+    const numerator = getRandomInt(-9, 9);
+    const problem = `${formatFrac({numerator: numerator, denominator: denominator}, true)} \\times ${integer}`;
+    const answer = simplify(numerator * integer, denominator);
+    questions.push({ problem, answer });
+    
+    return questions;
 };
 
 const generateLevel5 = (): Question[] => { // Division
