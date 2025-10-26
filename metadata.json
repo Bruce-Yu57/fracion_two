@@ -1,0 +1,5 @@
+{
+  "name": "Fraction Practice Pro",
+  "description": "An interactive web application for middle school students to practice fraction arithmetic. It features multiple difficulty levels, dynamically generated questions via Gemini, an integrated scratchpad for calculations, and instant answer verification.",
+  "requestFramePermissions": []
+}
